@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 854c2d5f08bf763468c922af7517e73c
+timeCreated: 1513102701
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Mikado Bold DEMO
+  fontNames:
+  - Mikado Bold DEMO
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

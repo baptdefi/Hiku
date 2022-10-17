@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: cf7ab548f6bd75647a77bb809777d2f2
+timeCreated: 1513132097
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - j3: {instanceID: 0}
+  - t3: {instanceID: 0}
+  - tablescore: {instanceID: 0}
+  - ecranv: {instanceID: 0}
+  - t4: {instanceID: 0}
+  - j4: {instanceID: 0}
+  - rank3: {instanceID: 0}
+  - rank4: {instanceID: 0}
+  - tetev: {instanceID: 0}
+  - textv: {instanceID: 0}
+  - eskimo: {fileID: 21300000, guid: cd670f2709d88014a80b80ba3ef4c828, type: 3}
+  - pingouin: {instanceID: 0}
+  - ours: {instanceID: 0}
+  - phoque: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
