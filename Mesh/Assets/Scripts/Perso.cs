@@ -37,28 +37,27 @@ public class Perso : MonoBehaviour {
 	Image img;
 
 	// Use this for initialization
-	void Start () {
-		//Debug.Log(PlayerPrefs.GetInt("Score1"));
-
-		//j1s = j1Score [1].GetComponent<Image> ();
-
+	void Start ()
+    {
 		// Sprite tete
 		img = this.GetComponent<Image> ();
-		if (this.name == "Tete1") {
-			
+		if (this.name == "Tete1")
+        {		
 			choix = PlayerPrefs.GetInt ("PreferedModel1");
-		} else if (this.name == "Tete2") {
-			
+		}
+        else if (this.name == "Tete2")
+        {		
 			choix = PlayerPrefs.GetInt ("PreferedModel2");
 		}
-		else if (this.name == "Tete3" && PlayerPrefs.GetInt("nbplayer")>=3) {
-
+		else if (this.name == "Tete3" && PlayerPrefs.GetInt("nbplayer")>=3)
+        {
 			choix = PlayerPrefs.GetInt ("PreferedModel3");
 		}
-		else if (this.name == "Tete4" && PlayerPrefs.GetInt("nbplayer")>=4) {
-
+		else if (this.name == "Tete4" && PlayerPrefs.GetInt("nbplayer")>=4)
+        {
 			choix = PlayerPrefs.GetInt ("PreferedModel4");
 		}
+
 		if (choix == 0)
 			img.sprite = eskimo;
 		else if (choix == 1)
@@ -74,128 +73,146 @@ public class Perso : MonoBehaviour {
 		score3 = (PlayerPrefs.GetInt ("Score3"));
 		score4 = (PlayerPrefs.GetInt ("Score4"));
 
-		for (int i = 0; i < 16; i++) {
-
-			if (score1 >= (i+1)) {
+		for (int i = 0; i < 16; i++)
+        {
+			if (score1 >= (i+1))
+            {
 				j1s = j1Score [i].GetComponent<Image> ();
 				j1s.sprite = snowball;
 			}
 		}
-
-		for (int i = 0; i < 16; i++) {
-
-			if (score2 >= (i+1)) {
+		for (int i = 0; i < 16; i++)
+        {
+			if (score2 >= (i+1))
+            {
 				j1s = j2Score [i].GetComponent<Image> ();
 				j1s.sprite = snowball;
 			}
 		}
-		for (int i = 0; i < 16; i++) {
-
-			if (score3 >= (i+1)) {
+		for (int i = 0; i < 16; i++)
+        {
+			if (score3 >= (i+1))
+            {
 				j1s = j3Score [i].GetComponent<Image> ();
 				j1s.sprite = snowball;
 			}
 		}
-		for (int i = 0; i < 16; i++) {
-
-			if (score4 >= (i+1)) {
+		for (int i = 0; i < 16; i++)
+        {
+			if (score4 >= (i+1))
+            {
 				j1s = j4Score [i].GetComponent<Image> ();
 				j1s.sprite = snowball;
 			}
 		}
 
 		// Ranks
-		if (PlayerPrefs.GetInt ("nbplayer") == 2) {
-			if (score1 > score2) {
+		if (PlayerPrefs.GetInt ("nbplayer") == 2)
+        {
+			if (score1 > score2)
+            {
 				rank = rank1.GetComponent<Image> ();
 				rank.sprite = premier;
 				rank = rank2.GetComponent<Image> ();
 				rank.sprite = deuxieme;
 			}
-			if (score1 < score2) {
+			if (score1 < score2)
+            {
 				rank = rank2.GetComponent<Image> ();
 				rank.sprite = premier;
 				rank = rank1.GetComponent<Image> ();
 				rank.sprite = deuxieme;
-
 			}
-			if (score1 == score2) {
+			if (score1 == score2)
+            {
 				rank = rank2.GetComponent<Image> ();
 				rank.sprite = premier;
 				rank = rank1.GetComponent<Image> ();
 				rank.sprite = premier;
-
 			}
-
 		}
-		if (PlayerPrefs.GetInt ("nbplayer") == 3) {
-			if (score1 >= score2 && score1> score3) {
+		if (PlayerPrefs.GetInt ("nbplayer") == 3)
+        {
+			if (score1 >= score2 && score1> score3)
+            {
 				rank = rank1.GetComponent<Image> ();
 				rank.sprite = premier;
-				if((score3 >= score2)){
-				rank = rank3.GetComponent<Image> ();
-				rank.sprite = deuxieme;
-				rank = rank2.GetComponent<Image> ();
-				rank.sprite = troisieme;
-				}
-				if((score2 >= score3)){
+				if((score3 >= score2))
+                {
+				    rank = rank3.GetComponent<Image> ();
+				    rank.sprite = deuxieme;
+				    rank = rank2.GetComponent<Image> ();
+				    rank.sprite = troisieme;
+			    }
+				if((score2 >= score3))
+                {
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = troisieme;
 				}
-				if (score2 == score3) {
+				if (score2 == score3)
+                {
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 				}
 			}
-			if (score2 >= score3 && score2> score1) {
+			if (score2 >= score3 && score2> score1)
+            {
 				rank = rank2.GetComponent<Image> ();
 				rank.sprite = premier;
-				if((score3 >= score1)){
+				if((score3 >= score1))
+                {
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 					rank = rank1.GetComponent<Image> ();
 					rank.sprite = troisieme;
 				}
-				if((score1 >= score3)){
+				if((score1 >= score3))
+                {
 					rank = rank1.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = troisieme;
 				}
-				if (score1 == score3) {
+				if (score1 == score3)
+                {
 					rank = rank1.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 				}
 			}
-			if (score3 >= score2 && score3> score1) {
+			if (score3 >= score2 && score3> score1)
+            {
 				rank = rank3.GetComponent<Image> ();
 				rank.sprite = premier;
-				if((score2 >= score1)){
+				if((score2 >= score1))
+                {
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 					rank = rank1.GetComponent<Image> ();
 					rank.sprite = troisieme;
 				}
-				if((score1 >= score2)){
+				if((score1 >= score2))
+                {
 					rank = rank1.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = troisieme;
 				}
-				if (score1 == score2) {
+				if (score1 == score2)
+                {
 					rank = rank1.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 				}
 			}
-			if (score1 == score2 && score1 == score3) {
+			if (score1 == score2 && score1 == score3)
+            {
 				rank = rank1.GetComponent<Image> ();
 				rank.sprite = premier;
 				rank = rank2.GetComponent<Image> ();
@@ -204,27 +221,33 @@ public class Perso : MonoBehaviour {
 				rank.sprite = premier;
 			}
 		}	
-		if (PlayerPrefs.GetInt ("nbplayer") == 4) {
-			if (score1 >= score2 && score1> score3 && score1 >= score4) {
+		if (PlayerPrefs.GetInt ("nbplayer") == 4)
+        {
+			if (score1 >= score2 && score1> score3 && score1 >= score4)
+            {
 				rank = rank1.GetComponent<Image> ();
 				rank.sprite = premier;
-				if((score3 >= score2)&& (score3 >= score4)){
+				if((score3 >= score2)&& (score3 >= score4))
+                {
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = deuxieme;
-					if ((score2 >= score4)) {
+					if ((score2 >= score4))
+                    {
 						rank = rank2.GetComponent<Image> ();
 						rank.sprite = troisieme;
 						rank = rank4.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 					}
-					else  {
+					else
+                    {
 						rank = rank2.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 						rank = rank4.GetComponent<Image> ();
 						rank.sprite = troisieme;
 					}
 				}
-				if ((score3 == score2) && (score3 >= score4)) {
+				if ((score3 == score2) && (score3 >= score4))
+                {
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = troisieme;
 					rank = rank3.GetComponent<Image> ();
@@ -232,7 +255,8 @@ public class Perso : MonoBehaviour {
 					rank = rank4.GetComponent<Image> ();
 					rank.sprite = quatrieme;
 				}
-				if ((score3 == score4) && (score4 >= score2)) {
+				if ((score3 == score4) && (score4 >= score2))
+                {
 					rank = rank4.GetComponent<Image> ();
 					rank.sprite = troisieme;
 					rank = rank3.GetComponent<Image> ();
@@ -240,7 +264,8 @@ public class Perso : MonoBehaviour {
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = quatrieme;
 				}
-				if ((score3 == score4) && (score4 < score2)) {
+				if ((score3 == score4) && (score4 < score2))
+                {
 					rank = rank4.GetComponent<Image> ();
 					rank.sprite = quatrieme;
 					rank = rank3.GetComponent<Image> ();
@@ -248,7 +273,8 @@ public class Perso : MonoBehaviour {
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 				}
-				if ((score2 == score4) && (score4 < score3)) {
+				if ((score2 == score4) && (score4 < score3))
+                {
 					rank = rank4.GetComponent<Image> ();
 					rank.sprite = quatrieme;
 					rank = rank2.GetComponent<Image> ();
@@ -256,7 +282,8 @@ public class Perso : MonoBehaviour {
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = deuxieme;
 				}
-				if ((score2 == score4) && (score4 >= score3)) {
+				if ((score2 == score4) && (score4 >= score3))
+                {
 					rank = rank4.GetComponent<Image> ();
 					rank.sprite = troisieme;
 					rank = rank2.GetComponent<Image> ();
@@ -264,7 +291,8 @@ public class Perso : MonoBehaviour {
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = quatrieme;
 				}
-				if ((score2 == score4) && (score4 == score3)) {
+				if ((score2 == score4) && (score4 == score3))
+                {
 					rank = rank4.GetComponent<Image> ();
 					rank.sprite = quatrieme;
 					rank = rank2.GetComponent<Image> ();
@@ -272,32 +300,38 @@ public class Perso : MonoBehaviour {
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = quatrieme;
 				}
-				if((score2 >= score3)&& (score2 >= score4)){
+				if((score2 >= score3)&& (score2 >= score4))
+                {
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = deuxieme;
-					if ((score3 >= score4)) {
+					if ((score3 >= score4))
+                    {
 						rank = rank3.GetComponent<Image> ();
 						rank.sprite = troisieme;
 						rank = rank4.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 					}
-					else  {
+					else
+                    {
 						rank = rank3.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 						rank = rank4.GetComponent<Image> ();
 						rank.sprite = troisieme;
 					}
 				}
-				if((score4 >= score3)&& (score4 >= score2)){
+				if((score4 >= score3)&& (score4 >= score2))
+                {
 					rank = rank4.GetComponent<Image> ();
 					rank.sprite = deuxieme;
-					if ((score3 >= score2)) {
+					if ((score3 >= score2))
+                    {
 						rank = rank3.GetComponent<Image> ();
 						rank.sprite = troisieme;
 						rank = rank2.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 					}
-					else  {
+					else
+                    {
 						rank = rank3.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 						rank = rank2.GetComponent<Image> ();
@@ -305,114 +339,123 @@ public class Perso : MonoBehaviour {
 					}
 				}
 			}
-
-		if (score2 >= score1 && score2> score3 && score2 >= score4) {
-				rank = rank2.GetComponent<Image> ();
-				rank.sprite = premier;
-				if((score3 >= score1)&& (score3 >= score4)){
-					rank = rank3.GetComponent<Image> ();
-					rank.sprite = deuxieme;
-					if ((score1 >= score4)) {
-						rank = rank1.GetComponent<Image> ();
-						rank.sprite = troisieme;
-						rank = rank4.GetComponent<Image> ();
-						rank.sprite = quatrieme;
-					}
-					else  {
-						rank = rank1.GetComponent<Image> ();
-						rank.sprite = quatrieme;
-						rank = rank4.GetComponent<Image> ();
-						rank.sprite = troisieme;
-					}
-				}
-
-
-
-
-
-				if((score1 >= score3)&& (score1 >= score4)){
+		    if (score2 >= score1 && score2> score3 && score2 >= score4)
+            {
+			    rank = rank2.GetComponent<Image> ();
+			    rank.sprite = premier;
+			    if((score3 >= score1)&& (score3 >= score4))
+                {
+				    rank = rank3.GetComponent<Image> ();
+				    rank.sprite = deuxieme;
+				    if ((score1 >= score4))
+                    {
+					    rank = rank1.GetComponent<Image> ();
+					    rank.sprite = troisieme;
+					    rank = rank4.GetComponent<Image> ();
+					    rank.sprite = quatrieme;
+				    }
+				    else
+                    {
+					    rank = rank1.GetComponent<Image> ();
+					    rank.sprite = quatrieme;
+					    rank = rank4.GetComponent<Image> ();
+					    rank.sprite = troisieme;
+				    }
+			    }
+			    if((score1 >= score3)&& (score1 >= score4))
+                {
+				    rank = rank1.GetComponent<Image> ();
+				    rank.sprite = deuxieme;
+				    if ((score3 >= score4))
+                    {
+					    rank = rank3.GetComponent<Image> ();
+					    rank.sprite = troisieme;
+					    rank = rank4.GetComponent<Image> ();
+					    rank.sprite = quatrieme;
+				    }
+				    else
+                    {
+					    rank = rank3.GetComponent<Image> ();
+					    rank.sprite = quatrieme;
+					    rank = rank4.GetComponent<Image> ();
+					    rank.sprite = troisieme;
+				    }
+			    }
+			    if((score4 >= score3)&& (score4 >= score1))
+                {
+				    rank = rank4.GetComponent<Image> ();
+				    rank.sprite = deuxieme;
+				    if ((score3 >= score1))
+                    {
+					    rank = rank3.GetComponent<Image> ();
+					    rank.sprite = troisieme;
+					    rank = rank1.GetComponent<Image> ();
+					    rank.sprite = quatrieme;
+				    }
+				    else
+                    {
+					    rank = rank3.GetComponent<Image> ();
+					    rank.sprite = quatrieme;
+					    rank = rank1.GetComponent<Image> ();
+					    rank.sprite = troisieme;
+				    }
+			    }
+		    }
+		    if (score3 >= score1 && score3> score2 && score3 >= score4)
+            {
+		        rank = rank3.GetComponent<Image> ();
+		        rank.sprite = premier;
+		        if((score2 >= score1)&& (score2 >= score4))
+                {
+			        rank = rank2.GetComponent<Image> ();
+			        rank.sprite = deuxieme;
+			        if ((score1 >= score4))
+                    {
+				        rank = rank1.GetComponent<Image> ();
+				        rank.sprite = troisieme;
+				        rank = rank4.GetComponent<Image> ();
+				        rank.sprite = quatrieme;
+			        }
+			        else
+                    {
+				        rank = rank1.GetComponent<Image> ();
+				        rank.sprite = quatrieme;
+				        rank = rank4.GetComponent<Image> ();
+				        rank.sprite = troisieme;
+			        }
+		        }
+				if((score1 >= score2)&& (score1 >= score4))
+                {
 					rank = rank1.GetComponent<Image> ();
 					rank.sprite = deuxieme;
-					if ((score3 >= score4)) {
-						rank = rank3.GetComponent<Image> ();
+					if ((score2 >= score4))
+                    {
+						rank = rank2.GetComponent<Image> ();
 						rank.sprite = troisieme;
 						rank = rank4.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 					}
-					else  {
-						rank = rank3.GetComponent<Image> ();
+					else
+                    {
+						rank = rank2.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 						rank = rank4.GetComponent<Image> ();
 						rank.sprite = troisieme;
 					}
 				}
-				if((score4 >= score3)&& (score4 >= score1)){
+				if((score4 >= score2)&& (score4 >= score1))
+                {
 					rank = rank4.GetComponent<Image> ();
 					rank.sprite = deuxieme;
-					if ((score3 >= score1)) {
-						rank = rank3.GetComponent<Image> ();
-						rank.sprite = troisieme;
-						rank = rank1.GetComponent<Image> ();
-						rank.sprite = quatrieme;
-					}
-					else  {
-						rank = rank3.GetComponent<Image> ();
-						rank.sprite = quatrieme;
-						rank = rank1.GetComponent<Image> ();
-						rank.sprite = troisieme;
-					}
-				}
-			}
-					if (score3 >= score1 && score3> score2 && score3 >= score4) {
-				rank = rank3.GetComponent<Image> ();
-				rank.sprite = premier;
-				if((score2 >= score1)&& (score2 >= score4)){
-					rank = rank2.GetComponent<Image> ();
-					rank.sprite = deuxieme;
-					if ((score1 >= score4)) {
-						rank = rank1.GetComponent<Image> ();
-						rank.sprite = troisieme;
-						rank = rank4.GetComponent<Image> ();
-						rank.sprite = quatrieme;
-					}
-					else  {
-						rank = rank1.GetComponent<Image> ();
-						rank.sprite = quatrieme;
-						rank = rank4.GetComponent<Image> ();
-						rank.sprite = troisieme;
-					}
-				}
-
-
-
-
-
-				if((score1 >= score2)&& (score1 >= score4)){
-					rank = rank1.GetComponent<Image> ();
-					rank.sprite = deuxieme;
-					if ((score2 >= score4)) {
-						rank = rank2.GetComponent<Image> ();
-						rank.sprite = troisieme;
-						rank = rank4.GetComponent<Image> ();
-						rank.sprite = quatrieme;
-					}
-					else  {
-						rank = rank2.GetComponent<Image> ();
-						rank.sprite = quatrieme;
-						rank = rank4.GetComponent<Image> ();
-						rank.sprite = troisieme;
-					}
-				}
-				if((score4 >= score2)&& (score4 >= score1)){
-					rank = rank4.GetComponent<Image> ();
-					rank.sprite = deuxieme;
-					if ((score2 >= score1)) {
+					if ((score2 >= score1))
+                    {
 						rank = rank2.GetComponent<Image> ();
 						rank.sprite = troisieme;
 						rank = rank1.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 					}
-					else  {
+					else
+                    {
 						rank = rank2.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 						rank = rank1.GetComponent<Image> ();
@@ -420,56 +463,61 @@ public class Perso : MonoBehaviour {
 					}
 				}
 			}
-					if (score4 >= score1 && score4> score2 && score4 >= score3) {
+			if (score4 >= score1 && score4> score2 && score4 >= score3)
+            {
 				rank = rank4.GetComponent<Image> ();
 				rank.sprite = premier;
-				if((score2 >= score1)&& (score2 >= score3)){
+				if((score2 >= score1)&& (score2 >= score3))
+                {
 					rank = rank2.GetComponent<Image> ();
 					rank.sprite = deuxieme;
-					if ((score1 >= score3)) {
+					if ((score1 >= score3))
+                    {
 						rank = rank1.GetComponent<Image> ();
 						rank.sprite = troisieme;
 						rank = rank3.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 					}
-					else  {
+					else
+                    {
 						rank = rank1.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 						rank = rank3.GetComponent<Image> ();
 						rank.sprite = troisieme;
 					}
 				}
-
-
-
-
-
-				if((score1 >= score2)&& (score1 >= score3)){
+				if((score1 >= score2)&& (score1 >= score3))
+                {
 					rank = rank1.GetComponent<Image> ();
 					rank.sprite = deuxieme;
-					if ((score2 >= score3)) {
+					if ((score2 >= score3))
+                    {
 						rank = rank2.GetComponent<Image> ();
 						rank.sprite = troisieme;
 						rank = rank3.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 					}
-					else  {
+					else
+                    {
 						rank = rank2.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 						rank = rank3.GetComponent<Image> ();
 						rank.sprite = troisieme;
 					}
 				}
-				if((score3 >= score2)&& (score3 >= score1)){
+				if((score3 >= score2)&& (score3 >= score1))
+                {
 					rank = rank3.GetComponent<Image> ();
 					rank.sprite = deuxieme;
-					if ((score2 >= score1)) {
+					if ((score2 >= score1))
+                    {
 						rank = rank2.GetComponent<Image> ();
 						rank.sprite = troisieme;
 						rank = rank1.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 					}
-					else  {
+					else
+                    {
 						rank = rank2.GetComponent<Image> ();
 						rank.sprite = quatrieme;
 						rank = rank1.GetComponent<Image> ();
@@ -477,10 +525,7 @@ public class Perso : MonoBehaviour {
 					}
 				}
 			}
-		}
-			
-
-			
+		}	
 	}
 	
 	// Update is called once per frame

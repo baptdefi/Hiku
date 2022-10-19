@@ -14,18 +14,21 @@ public class MeshGenerator : MonoBehaviour {
 	int[] triangles;
 	Vector2[] uvs;
 
-	void Awake() {
+	void Awake()
+    {
 		mf = GetComponent<MeshFilter>();
 		mc = GetComponent<MeshCollider>();
 	}
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		MakeMeshData ();
 		CreateMesh ();
 	}
 	
-	void MakeMeshData(){
+	void MakeMeshData()
+    {
 		//Create an array of vertices
 		vertices = new Vector3[]{new Vector3(2,1,2), new Vector3(1,1,3), new Vector3(3,1,3) , new Vector3(3,1,1), new Vector3(2,1,0), new Vector3(1,1,1), new Vector3(1,0,1), new Vector3(2,0,0),new Vector3(3,0,1),new Vector3(1,0,3), new Vector3(3,0,3)};
 		//Create an array of integers
@@ -34,11 +37,14 @@ public class MeshGenerator : MonoBehaviour {
 
 		uvs = new Vector2[vertices.Length];
 
-		for (int i = 0; i < uvs.Length; i++) {
+		for (int i = 0; i < uvs.Length; i++)
+        {
 			uvs [i] = new Vector2 (vertices [i].x-1, vertices [i].z-1);
 		}
-}
-	void CreateMesh(){
+    }
+
+	void CreateMesh()
+    {
 		m = new Mesh ();
 		m.Clear ();
 		m.vertices = vertices;
@@ -50,7 +56,5 @@ public class MeshGenerator : MonoBehaviour {
 
 		m.RecalculateBounds ();
 		m.RecalculateNormals ();
-
-
 	}
 }

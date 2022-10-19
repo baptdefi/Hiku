@@ -18,6 +18,7 @@ public class SnowBallScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        // OLD BEHAVIOUR TEST
 		//if (transform.position.y <= -10 || transform.position.z <= -35 || transform.position.z >= 35 || transform.position.x <= -80 || transform.position.x >= 30){
 		if(transform.position.y <= -10){
 			Destroy (gameObject);
@@ -40,8 +41,8 @@ public class SnowBallScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter (Collider other){
-		// si on dépasse les bordures de la zone de jeu, on active la gravité
-		if (other.gameObject.CompareTag("Bounds")){
+        // activate gravity if object outside play area
+        if (other.gameObject.CompareTag("Bounds")){
 			rb.useGravity = true;
 			rb.constraints = RigidbodyConstraints.FreezeRotation;
 			rb.AddForce (direction);

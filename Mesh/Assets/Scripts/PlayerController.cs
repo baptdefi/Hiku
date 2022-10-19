@@ -5,12 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
-	// OLD
-	//private float moveSpeed = 10;
-	//private float baseMoveSpeed = 10;
-	//private float dashMoveSpeed = 75;
-	//private float bonusMoveSpeed = 50;
-
 	private Rigidbody rb;
 
 	// GUI
@@ -102,12 +96,11 @@ public class PlayerController : MonoBehaviour {
 
 		rb = GetComponent<Rigidbody>();
 		
-		//affiche les bonus de p3 et p4 si present
+        // display P3 and P4 bonus if existing
 		if (PlayerPrefs.GetInt ("PreferedModel3") > -1) {
 			P3B.SetActive (true);
 			nbjoueur++;
 		}
-		
 		if (PlayerPrefs.GetInt ("PreferedModel4") > -1) {
 			P4B.SetActive (true);
 			nbjoueur++;
@@ -127,7 +120,7 @@ public class PlayerController : MonoBehaviour {
             DownKeyboardName = "J1_Keyboard_Down";
             LeftKeyboardName = "J1_Keyboard_Left";
             RightKeyboardName = "J1_Keyboard_Right";
-}
+        }
 		else if (playerName.Equals("Player2")){
 			AButtonName = "J2_BA";
 			BButtonName = "J2_BB";
@@ -169,16 +162,17 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             bBlockTileDestruction = !bBlockTileDestruction;
+            Debug.Log("Tile destruction on/off");
         }
 
-        // debug
-        //test modele au dessus du perso
-        if (Input.GetKeyDown (KeyCode.A)) {
+        // DEBUG
+        // TEST modele au dessus du perso
+        /*if (Input.GetKeyDown (KeyCode.A)) {
 		Vector3 bombPosition = this.gameObject.transform.GetChild (0).transform.position;
 		GameObject newbomb = bombModel;
 		newbomb.GetComponent<Rigidbody> ().isKinematic = true;
 		Instantiate (newbomb, bombPosition, Quaternion.LookRotation (playerDirection, Vector3.up));
-		}
+		}*/
 
 		//Get axis inputs
 		float hAxis = Input.GetAxis (XAxisName);
@@ -227,21 +221,16 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
-		Debug.DrawRay (transform.position, playerDirection * 100, Color.red);
-
-
 		//Dash
 		switch (dashState) 
 		{
 		case DashState.Ready:
 			if(Input.GetButtonDown (BButtonName) || Input.GetButtonDown(BButtonKeyboardName))
 			{
-				//print ("b button");
 				moveSpeed = dashMoveSpeed;
 				moveSpeedThreshold = dashMoveSpeedThreshold;
-					rb.mass += strengthBonus;
-					forceChanged = true;
-					Debug.Log (rb.mass);
+				rb.mass += strengthBonus;
+				forceChanged = true;
 				dashState = DashState.Dashing;
 			}
 			break;
@@ -255,7 +244,6 @@ public class PlayerController : MonoBehaviour {
 				if (forceChanged) {
 					rb.mass -= strengthBonus;
 					forceChanged = false;
-					Debug.Log (rb.mass);
 				}
 				dashState = DashState.Cooldown;
 			}
@@ -275,12 +263,8 @@ public class PlayerController : MonoBehaviour {
 
 			if (Input.GetButtonDown (AButtonName) || Input.GetButtonDown(AButtonKeyboardName)) {
 
-				//Debug.Log ("a button");
-
 				// Item
 				if (item.getType () == PickUp.PickUpType.Trap || item.getType () == PickUp.PickUpType.Jump || item.getType () == PickUp.PickUpType.Bomb || item.getType () == PickUp.PickUpType.Sardine || item.getType() == PickUp.PickUpType.SnowBall) {
-
-					//Debug.Log ("item");
 
 					// TRAP
 					if (item.getType () == PickUp.PickUpType.Trap) {
@@ -346,7 +330,7 @@ public class PlayerController : MonoBehaviour {
 						}
 					}
 						
-					// BOMB lancée
+					// BOMB thrown
 					else if (item.getType () == PickUp.PickUpType.Bomb) {
 						Vector3 bombPosition = new Vector3 (transform.position.x, 2.0f, transform.position.z);
 						// Drop the bomb a bit in front of the player
@@ -359,7 +343,7 @@ public class PlayerController : MonoBehaviour {
 							}
 
 							GameObject bomb = Instantiate (bombModel, bombPosition, Quaternion.identity) as GameObject;
-							bomb.GetComponent<Rigidbody> ().AddForce (transform.forward * 800);
+							bomb.GetComponent<Rigidbody> ().AddForce (transform.forward * 1200);
 						} else {
 							bombPosition.x += 1.8f * lastPlayerDirection.normalized.x;
 							bombPosition.z += 1.8f * lastPlayerDirection.normalized.z;
@@ -369,11 +353,11 @@ public class PlayerController : MonoBehaviour {
 							}
 
 							GameObject bomb = Instantiate (bombModel, bombPosition, Quaternion.identity) as GameObject;
-							bomb.GetComponent<Rigidbody> ().AddForce (transform.forward * 800);
+							bomb.GetComponent<Rigidbody> ().AddForce (transform.forward * 1200);
 						}
 					}
 						
-					/*// BOMB posée
+					/*// BOMB dropped
 					else if (item.getType () == PickUp.PickUpType.Bomb) {
 						Vector3 bombPosition = new Vector3 (transform.position.x, 0.2f, transform.position.z);
 						// Drop the bomb a bit behind the player
@@ -394,7 +378,7 @@ public class PlayerController : MonoBehaviour {
 						}
 					}
 
-					// Remise à zéro du sprite
+					// Sprite reset
 					if (playerName.Equals ("Player1")) {
 						IMP1.sprite = Vide;
 					}
@@ -408,21 +392,15 @@ public class PlayerController : MonoBehaviour {
 						IMP4.sprite = Vide;
 					}
 
-					// Item laché
-					itemHold = false;
-
-
+					// Item used
+					itemHold = false;      
 				}
 
 				// Bonus
 				else if (item.getType () == PickUp.PickUpType.Speed || item.getType () == PickUp.PickUpType.Strength || item.getType () == PickUp.PickUpType.Lightness) {
 				
-					//Debug.Log ("bonus");
-
-					// S'il n'y en pas deja un en cours
+					// If there is no bonus alread active
 					if (!bonusActive) {
-
-						//Debug.Log ("pas de bonus en cours, lancement");
 
 						// SPEED
 						if (item.getType () == PickUp.PickUpType.Speed) {
@@ -437,11 +415,10 @@ public class PlayerController : MonoBehaviour {
 						else if (item.getType () == PickUp.PickUpType.Strength) {
 							bonusActive = true;
 							rb.mass += strengthBonus;
-							Debug.Log (rb.mass);
 							bonusTimer = 0;
 							bonus = item;
 
-							// Grossissement
+							// Sprite gets bigger
 							//transform.GetChild(0).transform.localScale = new Vector3(1, 1, 1);
 							transform.localScale = new Vector3(2, 2, 2);
 						}
@@ -453,12 +430,12 @@ public class PlayerController : MonoBehaviour {
 							bonusTimer = 0;
 							bonus = item;
 
-							// Rapetissement
+							// Sprite gets smaller
 							//transform.GetChild(0).transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 							transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 						}
 
-						// Remise à zéro du sprite
+						// Sprite reset
 						if (playerName.Equals ("Player1")) {
 							IMP1.sprite = Vide;
 						}
@@ -472,7 +449,7 @@ public class PlayerController : MonoBehaviour {
 							IMP4.sprite = Vide;
 						}
 
-						// Item laché
+						// Item used
 						itemHold = false;
 					}
 				}
@@ -513,14 +490,12 @@ public class PlayerController : MonoBehaviour {
 			if (bonus.getType () == PickUp.PickUpType.Speed) {
 				if (bonusTimer < speedBonusDuration) {
 					bonusTimer++;
-					//Debug.Log (bonusTimer);
 				} else {
 					moveSpeed = baseMoveSpeed;
 					moveSpeedThreshold = baseMoveSpeedThreshold;
 					bonusTimer = 0;
 					bonusActive = false;
 					bonus = null;
-
 				}
 			}
 			else if (bonus.getType () == PickUp.PickUpType.Strength) {
@@ -528,18 +503,14 @@ public class PlayerController : MonoBehaviour {
 					bonusTimer++;
 				} else {
 					rb.mass -= strengthBonus;
-					Debug.Log (rb.mass);
 					bonusTimer = 0;
 					bonusActive = false;
-
-
-
-					// Taille normale
+     
+					// Sprite go to normal size
 					//transform.GetChild(0).transform.localScale = new Vector3(1, 1, 1);
 					transform.localScale = new Vector3(1, 1, 1);
 
-					bonus = null;
-
+                    bonus = null;
 				}
 			}
 			else if (bonus.getType () == PickUp.PickUpType.Lightness) {
@@ -550,15 +521,14 @@ public class PlayerController : MonoBehaviour {
 					bonusTimer = 0;
 					bonusActive = false;
 
-					// Taille normale
-					//transform.GetChild(0).transform.localScale = new Vector3(1, 1, 1);
-					transform.localScale = new Vector3(1, 1, 1);
+                    // Sprite go to normal size
+                    //transform.GetChild(0).transform.localScale = new Vector3(1, 1, 1);
+                    transform.localScale = new Vector3(1, 1, 1);
 
 					bonus = null;
 				}
 			}
-		}
-			
+		}		
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -568,7 +538,6 @@ public class PlayerController : MonoBehaviour {
 		{
 			if (!itemHold) {
 				item = other.gameObject.GetComponent<PickUp> ();
-				//Debug.Log (gameObject.name + " ITEM RAMASSE : " + item.getType ());
 
 				itemHold = true;
 
@@ -682,7 +651,7 @@ public class PlayerController : MonoBehaviour {
 					}
 				}
 				
-				// Détruit le gameObject
+				// Destroy pickup gameobject
 				other.gameObject.GetComponent<PickUp> ().destroyPickUp ();
 			}
 		}
@@ -691,9 +660,8 @@ public class PlayerController : MonoBehaviour {
 	public void becomeTrapped(GameObject p_trap, int p_mode){
 
 		if (!isTrapped) {
-			Debug.Log ("bloqué");
 
-			isTrapped = true;
+            isTrapped = true;
 			trap = p_trap;
 			trapTimer = 0;
 
@@ -708,13 +676,11 @@ public class PlayerController : MonoBehaviour {
 			rb.angularVelocity = Vector3.zero;
 			rb.velocity = Vector3.zero;
 		}
-
 	}
 
 
     void OnCollisionStay(Collision collisionInfo)
-    {
-		
+    {	
 		if (collisionInfo.gameObject.CompareTag ("Tile")) {
 
 			if (!isLight) {

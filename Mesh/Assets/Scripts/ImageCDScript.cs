@@ -17,11 +17,12 @@ public class ImageCDScript : MonoBehaviour {
 	void Update () {
 		if (parentCollider.GetComponent<PlayerController> ().getDashState ().ToString ().Equals ("Cooldown")) {
 
-
-			if (!childImage.activeSelf) {
+			if (!childImage.activeSelf)
+            {
 				childImage.SetActive (true);
 			}
-			else {
+			else
+            {
 				float timer = parentCollider.GetComponent<PlayerController> ().getDashTimer ();
 				float cooldown = parentCollider.GetComponent<PlayerController> ().getDashCooldown ();
 				float fillAmount = 0.02f + 1 - timer / cooldown;
@@ -31,7 +32,8 @@ public class ImageCDScript : MonoBehaviour {
 		}
 		else {
 
-			if (childImage.activeSelf) {
+			if (childImage.activeSelf)
+            {
 				childImage.SetActive (false);
 				childImage.GetComponent<UnityEngine.UI.Image> ().fillAmount = 0.0f;
 			}

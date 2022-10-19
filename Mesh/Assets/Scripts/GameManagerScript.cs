@@ -50,7 +50,6 @@ public class GameManagerScript : MonoBehaviour {
 	// Use this for initialization
 	private void Start () {
 
-		// remise à 0 lors d'une nouvelle manche
 		bonusCount = 0;
 		
 		List<Site> sites = new List<Site> ();
@@ -83,10 +82,10 @@ public class GameManagerScript : MonoBehaviour {
 
 		sites = v.getSites();
 
-		// map Site + Couleur
+		// map Site + Color
 		Dictionary<Site, int> sitesWithColors = new Dictionary<Site, int> ();
 
-		// init des couleurs à 0
+		// color init to 0
 		foreach (Site s in sites) {
 			sitesWithColors.Add (s, 0);
 		}
@@ -97,7 +96,7 @@ public class GameManagerScript : MonoBehaviour {
 			//Debug.Log ("Site principal numero" + s.x);
 
 			List<Site> neighbours = s.NeighborSites();
-			//Debug.Log ("nombre de voirsin " + neighbours.Count);
+			//Debug.Log ("nombre de voisin " + neighbours.Count);
 
 			List<int> cols = new List<int>();
 
@@ -175,60 +174,56 @@ public class GameManagerScript : MonoBehaviour {
 
 			// création de la tuile
 			tilesList.Add(TileGenerator.CreateTile (vertices, chosenMat));
-
 		}
 
-
 		OnDrawGizmos ();
-	}
-
-	public static void removeBonus(){
-		bonusCount--;
 	}
 
 	void Update()
 	{
 		Vector3 pickUpPosition;
 
-		// Si il n'y pas assez de bonus
-		if (bonusCount < BONUSMAX) {
-
-			// si on attend le timer
-			if (pickUpPopWaitTimer) {
-
-				//Debug.Log ("on attend le timer");
-
-				// incrémentation
-				if (pickUpPopTimer < pickUpPopcooldown) {
+		// If there is not enough bonus
+		if (bonusCount < BONUSMAX)
+        {
+			// If we wait for the timer
+			if (pickUpPopWaitTimer)
+            {
+				if (pickUpPopTimer < pickUpPopcooldown)
+                {
 					pickUpPopTimer++;
-				// remise à 0
-				} else {
+				}
+                else
+                {
 					pickUpPopTimer = 0;
 					pickUpPopWaitTimer = false;
 				}
-			// si l'apparition est possible
-			}else{
-
-				//Debug.Log ("on peut faire pop");
-
-				// maj du nb de bonus
+			// If apparition is possible
+			}
+            else
+            {
 				bonusCount++;
 
-				// creation d'un bonus
+				// Bonus creation
 				pickUpPosition = new Vector3 (UnityEngine.Random.Range (0, m_mapWidth), 1.4f, UnityEngine.Random.Range (0, m_mapHeight));
 				Instantiate (pickUp, pickUpPosition, Quaternion.identity);
-
 			}
-		}
-			
+		}		
 	}
 
-	public static void removeTile(GameObject p_tileToRemove){
+	public static void removeTile(GameObject p_tileToRemove)
+    {
 		tilesList.Remove (p_tileToRemove);
 	}
 
+    public static void removeBonus()
+    {
+        bonusCount--;
+    }
 
-	public bool DrawBounds = false;
+
+
+    public bool DrawBounds = false;
 	public bool DrawAllEdges = false;
 	public bool DrawDelaunayTriangulation = false;
 	public bool DrawManualVoronoiPolygons = false; // NOTE: this is super-slow, use DrawVoronoiRegions instead
@@ -289,10 +284,11 @@ public class GameManagerScript : MonoBehaviour {
 		if (DrawVoronoiRegions) {
 			//Debug.Log ("Found " + v.Regions ().Count + " regions to draw");
 			foreach (List<Vector2> region in v.Regions()) {
-				if (randomizeVoronoiColours) /** Note: the Edges display above (in Gray) shows unconnected edges,
-		but this section re-uses the actual semi-polygons created automatically by the Voronoi algorithm. To prove
-		this you can optionally turn on colourization of the edges, so that that shared edges will show with same colours
-		*/
+				if (randomizeVoronoiColours)
+                    /** Note: the Edges display above (in Gray) shows unconnected edges,
+		            but this section re-uses the actual semi-polygons created automatically by the Voronoi algorithm. To prove
+		            this you can optionally turn on colourization of the edges, so that that shared edges will show with same colours
+		            */
 					Gizmos.color = new Color (Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f));
 				else
 					Gizmos.color = Color.white;
@@ -304,12 +300,12 @@ public class GameManagerScript : MonoBehaviour {
 					if (randomizeVoronoiColours) {
 						/** To make them easier to see, shift the vectors SLIGHTLY towards the center point.
 		
-		REMoVED: WE CANT DO THAT WHEN USING THE REGIONS SHORTCUT, REGIONS DELETE THEIR POINTS, sadly :(
+		                REMoVED: WE CANT DO THAT WHEN USING THE REGIONS SHORTCUT, REGIONS DELETE THEIR POINTS, sadly :(
 		
-		 This lets you see EXACTLY what poly / partial poly the algorithm is giving us "for free",
-		 so that triangulating it will be easy in your own projects */
-						//	s += (siteCoord - s) * 0.05f;
-						//		e += (siteCoord - e) * 0.05f;
+		                This lets you see EXACTLY what poly / partial poly the algorithm is giving us "for free",
+		                so that triangulating it will be easy in your own projects */
+						//s += (siteCoord - s) * 0.05f;
+						//e += (siteCoord - e) * 0.05f;
 					}
 					Gizmos.DrawLine (s, e);
 
@@ -332,22 +328,23 @@ public class GameManagerScript : MonoBehaviour {
 		*/
 		if (DrawManualVoronoiPolygons) {
 			/** Note, the SiteCoords are identical to the raw Points array you passed-in when creating the Voronoi object,
-		I think. So ... you could safely re-use that here instead of fetching it from the Voronoi object (maybe; could be
-		some filteing happening? Dupes removed, etc?) */
+		    I think. So ... you could safely re-use that here instead of fetching it from the Voronoi object (maybe; could be
+		    some filteing happening? Dupes removed, etc?) */
 			List<Vector2> ses = m_points;// v.SiteCoords ();
 			foreach (Vector2 siteCoord in ses) {
-				if (randomizeVoronoiColours) /** Note: the Edges display above (in Gray) shows unconnected edges,
-		but this section re-uses the actual semi-polygons created automatically by the Voronoi algorithm. To prove
-		this you can optionally turn on colourization of the edges, so that that shared edges will show with same colours
-		*/
+				if (randomizeVoronoiColours)
+                    /** Note: the Edges display above (in Gray) shows unconnected edges,
+		            but this section re-uses the actual semi-polygons created automatically by the Voronoi algorithm. To prove
+		            this you can optionally turn on colourization of the edges, so that that shared edges will show with same colours
+		            */
 					Gizmos.color = new Color (Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f));
 				else
 					Gizmos.color = Color.white;
 
 				/** NB: this is the reason we had to change VoronoiDemo class and save the Voronoi object: the boundaries
-			are the Voronoi polygons, the most precious thing from the algorithm. They are saved as Regions data structure
-			when you run the algorithm - but that data structure throws-away the Site/Point that generates each Region.
-			*/
+			    are the Voronoi polygons, the most precious thing from the algorithm. They are saved as Regions data structure
+			    when you run the algorithm - but that data structure throws-away the Site/Point that generates each Region.
+			    */
 				List<LineSegment> outlineOfSite = v.VoronoiBoundaryForSite (siteCoord);
 				List<Vector2> pointsOnPolygonOutline = null;
 				if (CloseExternalVoronoPolys)
@@ -359,8 +356,8 @@ public class GameManagerScript : MonoBehaviour {
 					if (randomizeVoronoiColours) {
 						/** To make them easier to see, shift the vectors SLIGHTLY towards the center point.
 		
-		 This lets you see EXACTLY what poly / partial poly the algorithm is giving us "for free",
-		 so that triangulating it will be easy in your own projects */
+		                This lets you see EXACTLY what poly / partial poly the algorithm is giving us "for free",
+		                so that triangulating it will be easy in your own projects */
 						s += (siteCoord - s) * 0.05f;
 						e += (siteCoord - e) * 0.05f;
 					}
@@ -430,5 +427,4 @@ public class GameManagerScript : MonoBehaviour {
 			return false;
 		return true;
 	}
-
 }

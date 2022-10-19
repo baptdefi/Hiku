@@ -8,14 +8,13 @@ public class Tuile : MonoBehaviour {
 	private float resistance;
 	private bool hasPickUp = false;
 
-	// Valeur de destruction de la tuile
 	private float destructionValue = 2.5f;
 
-	// pas du changement de couleur en fonction de la resistance de base
+	// step to color change according to resistance
 	private float colorStep;
-	// coef pour le Lerp
+    // color lerp coef
 	private float colorLerp = 0.0f;
-	// bleu personnalise
+	// custom blue color
 	private Color blueColor = new Color(0.0f, 0.1540003f, 1.0f, 1.0f);
 
 	private MeshRenderer mr;
@@ -44,19 +43,18 @@ public class Tuile : MonoBehaviour {
 			
 		resistance = area*10;
 
-		// calcul du pas en fonction de la resistance initiale
+        // step according to resistance
 		colorStep = destructionValue / resistance;
-	
 	}
 
 	public void weakenTile (){
 
 		resistance -= destructionValue;
 
-		// maj du coef
+		// coef update
 		colorLerp += colorStep;
 
-		// nouvelle couleur
+		// new color
 		Color newColor = Color.Lerp (Color.white, blueColor, colorLerp); 
 
 		mr.material.color = newColor;

@@ -23,16 +23,14 @@ public class PickUp : MonoBehaviour {
 	private float bonusStrenght;
 	private float bonusJump;
 
-	// not used
-	//private MeshRenderer mr;
-
 	// Use this for initialization
 	void Start () {
 
-		// not used
-		//mr = GetComponent<MeshRenderer> ();
+        int number = Random.Range (0, 10);
+        
+        // TEST
+        //int number = 3;
 
-		int number = Random.Range (0, 10);
 		if (number == 0) {
 			Init (PickUp.PickUpType.Speed);
 		}
@@ -43,10 +41,10 @@ public class PickUp : MonoBehaviour {
 			Init (PickUp.PickUpType.Lightness);
 		}
 		if (number == 3) {
-			Init (PickUp.PickUpType.Bomb);
+			Init (PickUp.PickUpType.Trap);
 		}
 		if (number == 4) {
-			Init (PickUp.PickUpType.Trap);
+			Init (PickUp.PickUpType.Bomb);
 		}
 		if (number == 5) {
 			Init (PickUp.PickUpType.Jump);
@@ -69,8 +67,8 @@ public class PickUp : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (transform.position.y < -2.5f) {
-			Debug.Log ("Y bas -> destruction du pick up");
-			destroyPickUp ();
+            // pickup is out of play area
+            destroyPickUp();
 		}
 	}
 
@@ -90,7 +88,7 @@ public class PickUp : MonoBehaviour {
 		}
 	}
 
-	// Détruit le pickUp et met à jour le bonusCount du gameManager
+    // Destry pickup and update GameManager bonusCount
 	public void destroyPickUp(){
 		GameManagerScript.removeBonus ();
 		Destroy (transform.parent.gameObject);

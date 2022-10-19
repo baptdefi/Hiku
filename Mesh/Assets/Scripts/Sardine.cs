@@ -5,12 +5,14 @@ using UnityEngine;
 public class Sardine : MonoBehaviour {
 
 	private float speed = 30f;
-	//private float maxVelocityx = 20.0f;
 	private Rigidbody rb;
 	private Vector3 direction;
 
-	// Use this for initialization
-	void Start () {
+    // OLD BEHAVIOUR TEST
+    //private float maxVelocityx = 20.0f;
+
+    // Use this for initialization
+    void Start () {
 		rb = GetComponent<Rigidbody> ();
 		direction = transform.forward;
 		rb.velocity = direction * speed;
@@ -30,13 +32,14 @@ public class Sardine : MonoBehaviour {
 			rb.velocity = direction * speed;
 		}
 
+        // OLD BEHAVIOUR TEST
 		/*if (rb.velocity.magnitude <= maxVelocityx) {
 			rb.AddForce (direction, ForceMode.VelocityChange);
 		}*/
 	}
 
 	void OnTriggerEnter (Collider other){
-		// si on dépasse les bordures de la zone de jeu, on active la gravité
+		// activate gravity if object outside play area
 		if (other.gameObject.CompareTag("Bounds")){
 			rb.useGravity = true;
 			rb.constraints = RigidbodyConstraints.FreezeRotation;

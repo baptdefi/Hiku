@@ -14,17 +14,16 @@ public class load : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("J1_R2"))
+		if (Input.GetButtonDown("J1_R2") || Input.GetButtonDown("J1_Keyboard_Enter"))
 			SceneManager.LoadScene ("Menu Selection");
 
-		if (Input.GetButtonDown("J1_Keyboard_Enter"))
-			SceneManager.LoadScene ("Menu Selection");
-
-		if (!canvas.activeSelf) {
+		if (!canvas.activeSelf)
+        {
 			if (Input.GetButtonDown ("J1_BY"))
 				canvas.SetActive (true);
 		}
-		else {
+		else
+        {
 			if (Input.GetButtonDown ("J1_BB"))
 				canvas.SetActive (false);
 		}

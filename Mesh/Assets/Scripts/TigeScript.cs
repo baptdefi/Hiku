@@ -19,38 +19,33 @@ public class TigeScript : MonoBehaviour {
 		
 		timer++;
 
-		// si le pickup est activé
 		if (activated) {
 			if (tuile == null) {
 				transform.parent.transform.GetChild (1).gameObject.GetComponent<Rigidbody> ().isKinematic = false;
 			}
 		}
-		// si le pickup n'est pas encore activé
 		else {
-			// test du timer
 			if (timer > 5) {
-				// s'il n'y a pas de tuile en dessous
+				// no tile under the pickup
 				if (!tilePresent) {
 					// reroll
-					//Debug.Log("reroll");
 					GameManagerScript.removeBonus ();
 					Destroy (transform.parent.gameObject);
 				} else {
-					// le pickup s'active
+					// activate
 					activated = true;
-					// le pickup est affiché
+					// display
 					transform.parent.transform.GetChild (1).gameObject.transform.GetChild (0).gameObject.SetActive (true);
-					// mise en place du timer du GameManager
+					// GameManager timer starts
 					GameManagerScript.pickUpPopWaitTimer = true;
 				}
 			}
-
 		}
 	}
 
 	void OnTriggerEnter(Collider other) {
 
-		// si un tuile est touchée, alors l'emplacement est bon
+		// if a tile is detected, then the emplacement is good
 		if (other.gameObject.CompareTag("Tile")){
 			tilePresent = true;
 			tuile = other.gameObject;

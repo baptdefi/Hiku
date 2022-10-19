@@ -51,7 +51,7 @@ public class playersnb : MonoBehaviour {
 			nbJoueurGagnant++;
 		}
 
-		// 3 joueurs
+		// 3 players
 		if (PlayerPrefs.GetInt ("nbplayer") >= 3) {
 			j3.SetActive (true);
 			t3.SetActive (true);
@@ -63,7 +63,7 @@ public class playersnb : MonoBehaviour {
 			}
 		}
 
-		// 4 joueurs
+		// 4 players
 		if (PlayerPrefs.GetInt ("nbplayer") == 4) {
 			j4.SetActive (true);
 			t4.SetActive (true);
@@ -75,14 +75,14 @@ public class playersnb : MonoBehaviour {
 			}
 		}
 		
-		// Au moins un gagnant
+		// At least one winner
 		if (nbJoueurGagnant > 0) {
 			tablescore.SetActive (false);
 			ecranv.SetActive (true);
 			img = tetev.GetComponent<Image> ();
 			t = textv.GetComponent<Text> ();
 
-			// Egalité
+			// Draw
 			if (nbJoueurGagnant > 1) {
 				img.sprite = vide;
 				t.text = "Egalite";
@@ -119,11 +119,11 @@ public class playersnb : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        // Bouton start
+        // Start button
         if (Input.GetButtonDown ("J1_R2") || Input.GetButtonDown("J1_Keyboard_Enter")) {
-			// Partie terminée
+			// Game over
 			if (nbJoueurGagnant >= 1) {
-				// Raz des scores
+				// Scores reset
 				Score1.score = 0;
 				Score2.score = 0;
 				Score3.score = 0;
@@ -131,7 +131,7 @@ public class playersnb : MonoBehaviour {
 
 				SceneManager.LoadScene ("Load");
 			}
-			// Partie en cours
+			// Game running
 			else {
 				SceneManager.LoadScene ("mainscene");
 			}
