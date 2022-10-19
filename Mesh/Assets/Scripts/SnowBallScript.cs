@@ -5,7 +5,6 @@ using UnityEngine;
 public class SnowBallScript : MonoBehaviour {
 
 	private float speed = 30f;
-	private float maxVelocityx = 20.0f;
 	private Rigidbody rb;
 	private Vector3 direction;
 

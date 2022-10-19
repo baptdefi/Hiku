@@ -17,6 +17,9 @@ public class load : MonoBehaviour {
 		if (Input.GetButtonDown("J1_R2"))
 			SceneManager.LoadScene ("Menu Selection");
 
+		if (Input.GetButtonDown("J1_Keyboard_Enter"))
+			SceneManager.LoadScene ("Menu Selection");
+
 		if (!canvas.activeSelf) {
 			if (Input.GetButtonDown ("J1_BY"))
 				canvas.SetActive (true);

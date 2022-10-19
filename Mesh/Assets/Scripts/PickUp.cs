@@ -23,12 +23,14 @@ public class PickUp : MonoBehaviour {
 	private float bonusStrenght;
 	private float bonusJump;
 
-	private MeshRenderer mr;
+	// not used
+	//private MeshRenderer mr;
 
 	// Use this for initialization
 	void Start () {
 
-		mr = GetComponent<MeshRenderer> ();
+		// not used
+		//mr = GetComponent<MeshRenderer> ();
 
 		int number = Random.Range (0, 10);
 		if (number == 0) {

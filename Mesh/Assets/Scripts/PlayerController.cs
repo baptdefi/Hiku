@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour {
 	private float moveSpeedThreshold = 15f;
 	private float baseMoveSpeed = 5f;
 	private float baseMoveSpeedThreshold = 15f;
-	private float baseStrength = 1;
 
 	// ITEMS
 	private PickUp item = null;
@@ -83,8 +82,19 @@ public class PlayerController : MonoBehaviour {
 	private string BButtonName;
 	private string XAxisName;
 	private string YAxisName;
-	
-	private string playerName;
+
+    private string AButtonKeyboardName;
+	private string BButtonKeyboardName;
+    private string UpKeyboardName;
+    private string DownKeyboardName;
+    private string LeftKeyboardName;
+    private string RightKeyboardName;
+
+    // DEBUG
+    private bool bBlockTileDestruction = false;
+
+
+    private string playerName;
 	int nbjoueur=2;
 
 	// Use this for initialization
@@ -105,19 +115,31 @@ public class PlayerController : MonoBehaviour {
 		PlayerPrefs.SetInt ("nbjoueur", nbjoueur);
 		
 		playerName = transform.parent.gameObject.name;
-		
-		if (playerName.Equals("Player1")){
+
+        if (playerName.Equals("Player1")){
 			AButtonName = "J1_BA";
 			BButtonName = "J1_BB";
 			XAxisName = "J1_LStick_X";
 			YAxisName = "J1_LStick_Y";
-		}
+            AButtonKeyboardName = "J1_Keyboard_BA";
+            BButtonKeyboardName = "J1_Keyboard_BB";
+            UpKeyboardName = "J1_Keyboard_Up";
+            DownKeyboardName = "J1_Keyboard_Down";
+            LeftKeyboardName = "J1_Keyboard_Left";
+            RightKeyboardName = "J1_Keyboard_Right";
+}
 		else if (playerName.Equals("Player2")){
 			AButtonName = "J2_BA";
 			BButtonName = "J2_BB";
 			XAxisName = "J2_LStick_X";
 			YAxisName = "J2_LStick_Y";
-		}
+            AButtonKeyboardName = "J2_Keyboard_BA";
+            BButtonKeyboardName = "J2_Keyboard_BB";
+            UpKeyboardName = "J2_Keyboard_Up";
+            DownKeyboardName = "J2_Keyboard_Down";
+            LeftKeyboardName = "J2_Keyboard_Left";
+            RightKeyboardName = "J2_Keyboard_Right";
+        }
 		else if (playerName.Equals("Player3")){
 			AButtonName = "J3_BA";
 			BButtonName = "J3_BB";
@@ -143,14 +165,19 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-		//test modele au dessus du perso
-		if (Input.GetKeyDown (KeyCode.A)) {
-			print ("space");
-			Vector3 bombPosition = this.gameObject.transform.GetChild (0).transform.position;
-			GameObject newbomb = bombModel;
-			newbomb.GetComponent<Rigidbody> ().isKinematic = true;
-			Instantiate (newbomb, bombPosition, Quaternion.LookRotation (playerDirection, Vector3.up));
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            bBlockTileDestruction = !bBlockTileDestruction;
+        }
+
+        // debug
+        //test modele au dessus du perso
+        if (Input.GetKeyDown (KeyCode.A)) {
+		Vector3 bombPosition = this.gameObject.transform.GetChild (0).transform.position;
+		GameObject newbomb = bombModel;
+		newbomb.GetComponent<Rigidbody> ().isKinematic = true;
+		Instantiate (newbomb, bombPosition, Quaternion.LookRotation (playerDirection, Vector3.up));
 		}
 
 		//Get axis inputs
@@ -165,10 +192,31 @@ public class PlayerController : MonoBehaviour {
 			vAxis = 0;
 		}
 
-		// Move input
-		moveInput = new Vector3 (hAxis, 0, vAxis);
-		moveVelocity = moveInput * moveSpeed;
-		playerDirection = Vector3.right * hAxis + Vector3.forward * vAxis;
+        float moveInputVplus = 0;
+        float moveInputVminus = 0;
+        float moveInputHplus = 0;
+        float moveInputHminus = 0;
+        float moveInputV = 0;
+        float moveInputH = 0;
+
+        if (Input.GetButton(UpKeyboardName))
+            moveInputVplus = 1;
+        if (Input.GetButton(DownKeyboardName))
+            moveInputVminus = -1;
+        if (Input.GetButton(LeftKeyboardName))
+            moveInputHminus = -1;
+        if (Input.GetButton(RightKeyboardName))
+            moveInputHplus = 1;
+
+        moveInputV = moveInputVplus + moveInputVminus;
+        moveInputH = moveInputHplus + moveInputHminus;
+
+        // Controller and Keyboard should be detected and separated
+        // Move input
+        moveInput = new Vector3 (hAxis + moveInputH, 0, vAxis + moveInputV);
+
+        moveVelocity = moveInput * moveSpeed;
+		playerDirection = Vector3.right * (hAxis + moveInputH) + Vector3.forward * (vAxis + moveInputV);
 
 		// Rotation toward direction
 		if (playerDirection.sqrMagnitude > 0.0f) {
@@ -186,7 +234,7 @@ public class PlayerController : MonoBehaviour {
 		switch (dashState) 
 		{
 		case DashState.Ready:
-			if(Input.GetButtonDown (BButtonName))
+			if(Input.GetButtonDown (BButtonName) || Input.GetButtonDown(BButtonKeyboardName))
 			{
 				//print ("b button");
 				moveSpeed = dashMoveSpeed;
@@ -225,7 +273,7 @@ public class PlayerController : MonoBehaviour {
 		// Item utilisation
 		if (itemHold) {
 
-			if (Input.GetButtonDown (AButtonName)) {
+			if (Input.GetButtonDown (AButtonName) || Input.GetButtonDown(AButtonKeyboardName)) {
 
 				//Debug.Log ("a button");
 
@@ -673,7 +721,8 @@ public class PlayerController : MonoBehaviour {
 
 				Tuile t = collisionInfo.collider.gameObject.GetComponent<Tuile> ();
 
-				t.weakenTile();
+                if (!bBlockTileDestruction)
+				    t.weakenTile();
 			}
 		}
 

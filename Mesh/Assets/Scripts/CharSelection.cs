@@ -70,7 +70,7 @@ public class CharSelection : MonoBehaviour {
 		
 		// P1
 		if (!P1ingame){
-			if (Input.GetButtonDown("J1_R2")) {
+			if (Input.GetButtonDown("J1_R2") || Input.GetButtonDown("J1_Keyboard_BA")) {
 				P1ingame = true;
 				//Debug.Log ("P1ingame");
 
@@ -121,10 +121,11 @@ public class CharSelection : MonoBehaviour {
 					
 					//Get axis inputs
 					float hAxis = Input.GetAxis ("J1_LStick_X");
-					
 
-					
-					if (hAxis <= -0.9f){
+                    
+
+
+                    if (hAxis <= -0.9f || Input.GetButtonDown("J1_Keyboard_Left")){
 						
 						// désactive le model
 						modelsP1 [selectionP1].SetActive (false);
@@ -156,7 +157,7 @@ public class CharSelection : MonoBehaviour {
 						P1timer ++;
 					}
 					
-					if (hAxis >= 0.9f) {	
+					if (hAxis >= 0.9f || Input.GetButtonDown("J1_Keyboard_Right")){	
 								
 						modelsP1 [selectionP1].SetActive (false);
 						
@@ -197,7 +198,7 @@ public class CharSelection : MonoBehaviour {
 				}
 				
 				// remplacer par start
-				if (Input.GetButtonDown("J1_BA")) {
+				if (Input.GetButtonDown("J1_BA") || Input.GetButtonDown("J1_Keyboard_BA")) {
 					
 					// set l'index du model
 					PlayerPrefs.SetInt ("PreferedModel1", selectionP1);
@@ -213,7 +214,7 @@ public class CharSelection : MonoBehaviour {
 		
 		// P2
 		if (!P2ingame){
-			if (Input.GetButtonDown("J2_R2")) {
+			if (Input.GetButtonDown("J2_R2") || Input.GetButtonDown("J2_Keyboard_BA")) {
 				P2ingame = true;
 				//Debug.Log ("P2ingame");
 
@@ -267,7 +268,7 @@ public class CharSelection : MonoBehaviour {
 					
 
 					
-					if (hAxis <= -0.9f){
+					if (hAxis <= -0.9f || Input.GetButtonDown("J2_Keyboard_Left")){
 						
 						// désactive le model
 						modelsP2 [selectionP2].SetActive (false);
@@ -299,7 +300,7 @@ public class CharSelection : MonoBehaviour {
 						P2timer ++;
 					}
 					
-					if (hAxis >= 0.9f) {	
+					if (hAxis >= 0.9f || Input.GetButtonDown("J2_Keyboard_Right")) {	
 								
 						modelsP2 [selectionP2].SetActive (false);
 						
@@ -340,7 +341,7 @@ public class CharSelection : MonoBehaviour {
 				}
 				
 				// remplacer par start
-				if (Input.GetButtonDown("J2_BA")) {
+				if (Input.GetButtonDown("J2_BA") || Input.GetButtonDown("J2_Keyboard_BA")) {
 					
 					// set l'index du model
 					PlayerPrefs.SetInt ("PreferedModel2", selectionP2);
@@ -655,7 +656,7 @@ public class CharSelection : MonoBehaviour {
 			GameObject.Find ("ExplanationsPicture2").GetComponent<Image> ().enabled = false;
 			GameObject.Find ("ExplanationsPicture3").GetComponent<Image> ().enabled = true;
 
-			if (Input.GetButtonDown("J1_R2")) {
+			if (Input.GetButtonDown("J1_R2") || Input.GetButtonDown("J1_Keyboard_Enter")) {
 				explanationsPicture3 = false;
 				launchGame = true;
 			}
@@ -665,7 +666,7 @@ public class CharSelection : MonoBehaviour {
 			GameObject.Find ("ExplanationsPicture1").GetComponent<Image> ().enabled = false;
 			GameObject.Find ("ExplanationsPicture2").GetComponent<Image> ().enabled = true;
 
-			if (Input.GetButtonDown("J1_R2")) {
+			if (Input.GetButtonDown("J1_R2") || Input.GetButtonDown("J1_Keyboard_Enter")) {
 				explanationsPicture2 = false;
 				explanationsPicture3 = true;
 			}
@@ -674,7 +675,7 @@ public class CharSelection : MonoBehaviour {
 
 			GameObject.Find ("ExplanationsPicture1").GetComponent<Image> ().enabled = true;
 
-			if (Input.GetButtonDown("J1_R2")) {
+			if (Input.GetButtonDown("J1_R2") || Input.GetButtonDown("J1_Keyboard_Enter")) {
 				explanationsPicture1 = false;
 				explanationsPicture2 = true;
 			}
@@ -685,7 +686,7 @@ public class CharSelection : MonoBehaviour {
 		if (P1ingame && P2ingame && P3ingame && P4ingame){
 			if (P1ready && P2ready && P3ready && P4ready){
 				GameObject.Find ("PressStartToPlay").GetComponent<Text> ().text = "Press Start to play";
-				if (Input.GetButtonDown("J1_R2")) {
+				if (Input.GetButtonDown("J1_R2") || Input.GetButtonDown("J1_Keyboard_Enter")) {
 					explanationsPicture1 = true;
 				}
 			}	
@@ -694,7 +695,7 @@ public class CharSelection : MonoBehaviour {
 		else if (P1ingame && P2ingame && P3ingame){
 			if (P1ready && P2ready && P3ready){
 				GameObject.Find ("PressStartToPlay").GetComponent<Text> ().text = "Press Start to play";
-				if (Input.GetButtonDown("J1_R2")) {
+				if (Input.GetButtonDown("J1_R2") || Input.GetButtonDown("J1_Keyboard_Enter")) {
 					explanationsPicture1 = true;
 				}
 			}	
@@ -703,7 +704,7 @@ public class CharSelection : MonoBehaviour {
 		else if (P1ingame && P2ingame){
 			if (P1ready && P2ready){
 				GameObject.Find ("PressStartToPlay").GetComponent<Text> ().text = "Press Start to play";
-				if (Input.GetButtonDown("J1_R2")) {
+				if (Input.GetButtonDown("J1_R2") || Input.GetButtonDown("J1_Keyboard_Enter")) {
 					explanationsPicture1 = true;
 				}
 			}	

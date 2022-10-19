@@ -119,8 +119,8 @@ public class playersnb : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// Bouton start
-		if (Input.GetButtonDown ("J1_R2")) {
+        // Bouton start
+        if (Input.GetButtonDown ("J1_R2") || Input.GetButtonDown("J1_Keyboard_Enter")) {
 			// Partie terminée
 			if (nbJoueurGagnant >= 1) {
 				// Raz des scores

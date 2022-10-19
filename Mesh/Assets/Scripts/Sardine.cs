@@ -5,8 +5,7 @@ using UnityEngine;
 public class Sardine : MonoBehaviour {
 
 	private float speed = 30f;
-	//private float speed = 5f;
-	private float maxVelocityx = 20.0f;
+	//private float maxVelocityx = 20.0f;
 	private Rigidbody rb;
 	private Vector3 direction;
 

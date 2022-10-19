@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEditor;
+//using UnityEditor;
 using System.IO;
 
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using Delaunay;
 using Delaunay.Geo;
 
@@ -40,7 +40,6 @@ public class GameManagerScript : MonoBehaviour {
 	private List<LineSegment> m_spanningTree;
 	private List<LineSegment> m_delaunayTriangulation;
 	private Delaunay.Voronoi v;
-	private int lloydIterations = 5;
 
 	public static List<GameObject> tilesList = new List<GameObject> ();
 
@@ -217,7 +216,7 @@ public class GameManagerScript : MonoBehaviour {
 
 				// creation d'un bonus
 				pickUpPosition = new Vector3 (UnityEngine.Random.Range (0, m_mapWidth), 1.4f, UnityEngine.Random.Range (0, m_mapHeight));
-				GameObject newPickUp = Instantiate (pickUp, pickUpPosition, Quaternion.identity);
+				Instantiate (pickUp, pickUpPosition, Quaternion.identity);
 
 			}
 		}
