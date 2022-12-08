@@ -4,7 +4,7 @@ This is a local multiplayer action game where you fight to be the last survivor 
 
 Use the items to put your opponents away, dodge their attacks and be careful, the ice is fragile !
 
-![capture0](https://user-images.githubusercontent.com/19150146/206450324-a226d6b8-72d3-4b86-924a-5518c9e476ba.png)
+![capture0](https://user-images.githubusercontent.com/19150146/206450626-a7ca88ab-d467-4409-88d0-863b5d85039b.png)
 ![capture4](https://user-images.githubusercontent.com/19150146/206450394-646efd3e-32c0-415f-87af-eb87a75bbd2d.png)
 ![capture5](https://user-images.githubusercontent.com/19150146/206450402-c84a3fa9-658c-4ee3-9143-16ced42cfa83.png)
 ![capture1](https://user-images.githubusercontent.com/19150146/206450365-836b0e52-d768-4d1c-b5cc-be0aa732da63.png)
